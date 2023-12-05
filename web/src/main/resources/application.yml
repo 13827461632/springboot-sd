@@ -1,0 +1,4 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # 配置这个来防止swagger报错
