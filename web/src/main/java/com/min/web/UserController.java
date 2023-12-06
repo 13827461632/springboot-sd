@@ -3,6 +3,7 @@ package com.min.web;
 import com.min.comm.dto.User;
 import com.min.comm.error.ErrorEnum;
 import com.min.comm.exception.BizException;
+import com.min.comm.logaop.MethodLog;
 import com.min.comm.response.ResultVO;
 import com.min.dao.dataobject.UserDO;
 import com.min.service.UserService;
@@ -24,6 +25,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @MethodLog
     @ApiOperation(value = "查询用户", notes = "根据姓名查询用户")
     @GetMapping("/user/{name}")
     public String queryUserByName(@PathVariable String name) {
@@ -33,7 +35,7 @@ public class UserController {
             return "查找的用户为：" + user.getName();
         } catch (Exception e) {
             //TODO 定位问题打印异常信息（开发看的）
-            System.out.println("记录exception:"+e.getMessage());
+            System.out.println("记录exception:" + e.getMessage());
             //TODO 自定义异常（抛给前台看的）
             throw new BizException(ErrorEnum.DATA_ERROR.getCode(), "根据姓名查询用户可能为空，请检查");
         }
